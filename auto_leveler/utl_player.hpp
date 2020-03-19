@@ -30,7 +30,7 @@ namespace player
 			return;
 
 		const auto current_side = process::read_vmem<int8_t>( mode_info + 0x30 );
-		process::write_vmem<int8_t>( mode_info + 0x30, current_side - 1 );
+		process::write_vmem<int8_t>( mode_info + 0x30, current_side == 3 ? 4 : 3 );
 	}
 
 	void set_health( int32_t new_health )

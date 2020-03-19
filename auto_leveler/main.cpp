@@ -25,7 +25,7 @@ int main( )
 	int32_t wanted_level = 0;
 	std::cin >> wanted_level;
 
-	while ( wanted_level > player::get_level( ) )
+	while ( wanted_level > player::get_level( ) && !GetAsyncKeyState( VK_END ) )
 	{
 		static auto played_once = false;
 
@@ -34,10 +34,7 @@ int main( )
 			// simulate a left arrow key press (to switch to the retry situation button)
 			// simulate an ENTER key press (to press the retry situation button instantly)
 			if ( played_once )
-			{
-				input::send( VK_LEFT );
-				input::send( VK_RETURN );
-			}
+				input::send( VK_RETURN, 0x9c );
 
 			continue;
 		}
@@ -49,7 +46,7 @@ int main( )
 
 		game::local_player = process::read_vmem( game_profile + 0x28 );
 
-		player::set_score( std::numeric_limits<int32_t>::max( ) );
+		player::set_score( std::numeric_limits<int16_t>::max( ) );
 		player::set_health( 0 );
 		player::switch_team( );
 

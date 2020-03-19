@@ -50,6 +50,7 @@ namespace game
 	{
 		const auto game_state = process::read_vmem<int8_t>( round_manager + 0x2e8 );
 
+		// in action phase, or in preparation phase
 		return game_state == 2 || game_state == 3;
 	}
 }
